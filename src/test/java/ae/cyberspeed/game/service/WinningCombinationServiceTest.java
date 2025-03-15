@@ -1,6 +1,6 @@
 package ae.cyberspeed.game.service;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class WinningCombinationServiceTest {
 
-    private static WinningCombinationService winningCombinationService;
+    private WinningCombinationService winningCombinationService;
 
-    @BeforeAll
+    @BeforeEach
     @DisplayName("*********SetUp************")
-    public static void setup() {
+    public void setup() {
         winningCombinationService = new WinningCombinationService();
     }
 

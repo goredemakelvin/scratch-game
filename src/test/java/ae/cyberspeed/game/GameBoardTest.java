@@ -3,7 +3,7 @@ package ae.cyberspeed.game;
 import ae.cyberspeed.game.data.config.GameConfig;
 import ae.cyberspeed.game.exception.GameBoardException;
 import ae.cyberspeed.game.service.GameBoardService;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GameBoardTest {
-    private static GameBoardService gameBoardService;
-    private static GameConfig gameConfig;
+    private GameBoardService gameBoardService;
+    private GameConfig gameConfig;
 
-    @BeforeAll
+    @BeforeEach
     @DisplayName("*********SetUp************")
-    public static void setup() {
+    public void setup() {
         gameBoardService = new GameBoardService();
         gameConfig = new GameConfig();
     }

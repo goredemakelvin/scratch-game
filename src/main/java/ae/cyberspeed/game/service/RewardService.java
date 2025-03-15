@@ -10,12 +10,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class RewardService {
 
-    private String[][] matrix;
-    private double betAmount;
-    private Symbols symbols;
-    private Map<WinItem, String> winItemMap;
-    private String bonusSymbol;
-
 
     public double calculateReward(Map<WinItem, String> winItemMap, double betAmount,
                                   String bonusSymbol, GameConfig gameConfig) {
