@@ -1,38 +1,24 @@
 package ae.cyberspeed.game;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import ae.cyberspeed.game.service.BetService;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import static org.junit.jupiter.api.Assertions.*;
+class AppTest {
+
+    private static App app;
+    @BeforeAll
+    @DisplayName("*********SetUp************")
+    public static void setup() {
+        app = new App();
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    @DisplayName("Test if exception is thrown when params are empty")
+    void init() {
+        assertThrows(IllegalArgumentException.class, () -> app.init(new String[]{}));
     }
 }
