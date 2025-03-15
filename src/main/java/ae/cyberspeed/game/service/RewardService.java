@@ -68,7 +68,6 @@ public class RewardService {
             }
             betAmount += (betAmount * getRewardMultiplier(symbol, gameConfig));
         }
-        ;
         betAmount += getBonus(bonusSymbol, betAmount, gameConfig);
         return betAmount;
     }

@@ -52,7 +52,7 @@ public class App {
 
     }
 
-    public static Params init(String... args) throws IOException {
+    public static Params init(String... args)  {
         if (args == null || args.length == 0) {
             throw new IllegalArgumentException("No parameters given");
         }
