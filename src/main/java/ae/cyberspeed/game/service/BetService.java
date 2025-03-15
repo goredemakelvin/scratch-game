@@ -5,13 +5,13 @@ import ae.cyberspeed.game.exception.InvalidAmountException;
 
 public class BetService {
 
-    public Bet placeBet(double amount){
-        if(amount<=0){
+    public Bet placeBet(double amount) {
+        if (amount <= 0) {
             throw new InvalidAmountException("Bet amount cannot be negative or 0");
         }
-     Bet bet = new Bet();
-     bet.setBetAmount(amount);
-     return bet;
+        Bet bet = new Bet();
+        bet.setBetAmount(amount);
+        return bet;
     }
 
 }

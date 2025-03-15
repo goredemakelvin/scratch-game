@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SameSymbol9Times implements WinItem{
+public class SameSymbol9Times implements WinItem {
     private int reward_multiplier;
     private String when;
     private int count;

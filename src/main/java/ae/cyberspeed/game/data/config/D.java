@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class D{
+public class D {
     private int reward_multiplier;
     private String type;
     @JsonProperty("d")

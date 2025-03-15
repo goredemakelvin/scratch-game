@@ -1,14 +1,15 @@
 package ae.cyberspeed.game;
 
-import ae.cyberspeed.game.service.BetService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class AppTest {
 
     private static App app;
+
     @BeforeAll
     @DisplayName("*********SetUp************")
     public static void setup() {

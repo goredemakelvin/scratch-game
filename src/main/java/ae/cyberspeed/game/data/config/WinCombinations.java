@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class WinCombinations{
+public class WinCombinations {
     private SameSymbol3Times same_symbol_3_times;
     private SameSymbol4Times same_symbol_4_times;
     private SameSymbol5Times same_symbol_5_times;

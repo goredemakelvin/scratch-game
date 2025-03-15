@@ -6,52 +6,57 @@ import ae.cyberspeed.game.data.config.GameConfig;
 import ae.cyberspeed.game.data.config.WinItem;
 import ae.cyberspeed.game.service.DisplayService;
 import ae.cyberspeed.game.service.GameBoardService;
+import ae.cyberspeed.game.service.RewardService;
 import ae.cyberspeed.game.service.WinningCombinationService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Scanner;
-
+import java.util.Map;
+import java.util.Random;
 
 
 public class App {
     public static void main(String[] args) throws IOException {
-       // init(args);
+        Params init = init(args);
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        InputStream is = App.class.getClassLoader().getResourceAsStream("config.json");
+        FileInputStream fis = new FileInputStream(init.getConfigPath());
+
         DisplayService displayService = new DisplayService();
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter Bet Amount :");
-        Double amount = 10.10;
-        //scanner.nextDouble();
-        displayService.printBetAmount(new Bet(amount));
-        GameConfig gameConfig = mapper.readValue(is, GameConfig.class);
+        displayService.printBetAmount(new Bet(init.getBettingAmount()));
+        GameConfig gameConfig = mapper.readValue(fis, GameConfig.class);
         GameBoardService gameBoardService = new GameBoardService(gameConfig);
-        double[][][] boardMatrices = gameBoardService.getStandardSymbolsProbabilityMatrix(gameConfig);
-        char[][] generatedSymbols = displayService.generateStandardSymbol(boardMatrices, gameConfig.getRows(), gameConfig.getColumns());
+        double[][][] standardSymbolProbabilities = gameBoardService.getStandardSymbolsProbabilityMatrix(gameConfig);
+        String[][] generatedSymbols = displayService.generateStandardSymbol(standardSymbolProbabilities, gameConfig.getRows(), gameConfig.getColumns());
         WinningCombinationService winningCombinationService = new WinningCombinationService();
-        List<WinItem> winItems = winningCombinationService.applyWinningCombinations(generatedSymbols, gameConfig);
-        Result result=new Result();
+        Map<WinItem, String> winItems = winningCombinationService.applyWinningCombinations(generatedSymbols, gameConfig);
+        String[][][] bonusSymbolProbabilityMatrix = gameBoardService.getBonusSymbolProbabilityMatrix(gameConfig);
+        Random random = new Random();
+        int randomRow = random.nextInt(gameConfig.getRows());  // 0 to 2
+        int randomCol = random.nextInt(gameConfig.getColumns());  // 0 to 2
+        int randomBonusSymbol = random.nextInt(4);
+        // Get the random item
+        String randomItem = bonusSymbolProbabilityMatrix[randomRow][randomCol][randomBonusSymbol];
+        RewardService rewardService = new RewardService();
+        double reward = rewardService.calculateReward(winItems, 25, randomItem, gameConfig);
+        Result result = new Result();
         result.setMatrix(generatedSymbols);
         result.setAppliedWinningCombinations(winItems);
-        result.setReward("500");
-        result.setAppliedBonusSymbol("");
+        result.setReward(reward);
+        result.setAppliedBonusSymbol(randomItem);
         mapper.writeValue(System.out, result);
-
-
 
 
     }
 
     public static Params init(String... args) throws IOException {
-       if( args==null || args.length == 0) {
-         throw new IllegalArgumentException("No parameters given");
-       }
+        if (args == null || args.length == 0) {
+            throw new IllegalArgumentException("No parameters given");
+        }
         String configPath = null;
         double bettingAmount = 0;
         // Iterate over the command-line arguments

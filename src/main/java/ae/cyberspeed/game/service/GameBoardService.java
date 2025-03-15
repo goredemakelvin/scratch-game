@@ -27,46 +27,47 @@ public class GameBoardService {
 
     public double[][][] getStandardSymbolsProbabilityMatrix(GameConfig gameConfig) {
         Probabilities probabilities = gameConfig.getProbabilities();
-        int size = probabilities.getStandard_symbols().size();
-        double[][][] matrices = new double[gameConfig.getRows()][gameConfig.getColumns()][size];
+        double[][][] matrices = new double[gameConfig.getRows()][gameConfig.getColumns()][6];
         for (int i = 0; i < gameConfig.getRows(); i++) {
             for (int j = 0; j < gameConfig.getColumns(); j++) {
                 for (int k = 0; k < 6; k++) {
                     StandardSymbol standardSymbol = probabilities.getStandard_symbols().get(k);
+                    double totalProbability = standardSymbol.getSymbolTotalProbability();
                     switch (k) {
+
                         case 0: {
-                            int probability = standardSymbol.getSymbols().getA().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double probability = standardSymbol.getSymbols().getA().getProbability();
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
                         case 1: {
                             int probability = standardSymbol.getSymbols().getB().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
                         case 2: {
                             int probability = standardSymbol.getSymbols().getC().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
                         case 3: {
                             int probability = standardSymbol.getSymbols().getD().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
                         case 4: {
                             int probability = standardSymbol.getSymbols().getE().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
                         case 5: {
                             int probability = standardSymbol.getSymbols().getF().getProbability();
-                            double result = standardSymbol.getSymbolTotalProbability() / probability;
+                            double result = probability / totalProbability;
                             matrices[i][j][k] = result;
                         }
                         break;
@@ -91,7 +92,7 @@ public class GameBoardService {
         arrayBonusProbability[3] = _1000x;
         String _MISS = probabilities.getBonus_symbols().getSymbols().getMISS().getName();
 
-        String[][][] matrices = new String[gameConfig.getRows()][gameConfig.getColumns()][5];
+        String[][][] matrices = new String[gameConfig.getRows()][gameConfig.getColumns()][4];
         for (int i = 0; i < gameConfig.getRows(); i++) {
             for (int j = 0; j < gameConfig.getColumns(); j++) {
                 for (int k = 0; k < 4; k++) {

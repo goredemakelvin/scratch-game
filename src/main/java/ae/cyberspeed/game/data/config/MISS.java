@@ -12,12 +12,13 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonRootName(value = "MISS")
-public class MISS{
+public class MISS {
     private String type;
     private String impact;
     @JsonProperty("MISS")
     private int probability;
     private String name = "+1000";
+
     public MISS(int probability) {
         this.probability = probability;
     }

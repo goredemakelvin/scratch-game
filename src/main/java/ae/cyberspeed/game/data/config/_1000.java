@@ -2,14 +2,17 @@ package ae.cyberspeed.game.data.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonRootName(value = "+1000")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class _1000{
+public class _1000 {
     private int extra;
     private String type;
     private String impact;

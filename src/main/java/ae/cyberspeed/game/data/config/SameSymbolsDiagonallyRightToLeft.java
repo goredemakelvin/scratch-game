@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class SameSymbolsDiagonallyRightToLeft implements WinItem{
+public class SameSymbolsDiagonallyRightToLeft implements WinItem {
     private int reward_multiplier;
     private String when;
     private String group;

@@ -1,13 +1,16 @@
 package ae.cyberspeed.game.data.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class _10x{
+public class _10x {
     private int reward_multiplier;
     private String type;
     private String impact;
