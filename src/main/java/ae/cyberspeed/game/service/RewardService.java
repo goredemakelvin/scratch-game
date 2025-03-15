@@ -1,13 +1,11 @@
 package ae.cyberspeed.game.service;
 
 import ae.cyberspeed.game.data.config.*;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
 @NoArgsConstructor
-@AllArgsConstructor
 public class RewardService {
 
 

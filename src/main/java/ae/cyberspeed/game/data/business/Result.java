@@ -150,8 +150,6 @@ public class Result {
 
             }
         }
-
-
         this.appliedWinningCombinations = list;
 
 
