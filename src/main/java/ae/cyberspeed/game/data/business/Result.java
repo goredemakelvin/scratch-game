@@ -32,8 +32,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s3.getGroup());
-                items.add(s3.getWhen());
+                items.add(s3.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -43,8 +42,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s4.getGroup());
-                items.add(s4.getWhen());
+                items.add(s4.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -54,8 +52,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s5.getGroup());
-                items.add(s5.getWhen());
+                items.add(s5.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -65,8 +62,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s6.getGroup());
-                items.add(s6.getWhen());
+                items.add(s6.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -76,8 +72,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s7.getGroup());
-                items.add(s7.getWhen());
+                items.add(s7.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -87,8 +82,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s8.getGroup());
-                items.add(s8.getWhen());
+                items.add(s8.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -98,8 +92,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(s9.getGroup());
-                items.add(s9.getWhen());
+                items.add(s9.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -109,8 +102,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(sh.getGroup());
-                items.add(sh.getWhen());
+                items.add(sh.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -120,8 +112,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(sv.getGroup());
-                items.add(sv.getWhen());
+                items.add(sv.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -132,8 +123,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(sv.getGroup());
-                items.add(sv.getWhen());
+                items.add(sv.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 
@@ -143,8 +133,7 @@ public class Result {
                 combination = new WinCombination();
                 combination.setSymbol(symbol);
                 List<String> items = new ArrayList<>();
-                items.add(sv.getGroup());
-                items.add(sv.getWhen());
+                items.add(sv.getClass().getSimpleName());
                 combination.setDescription(items);
                 list.add(combination);
 

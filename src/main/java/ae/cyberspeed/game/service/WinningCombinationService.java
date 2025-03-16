@@ -4,43 +4,35 @@ import ae.cyberspeed.game.data.config.GameConfig;
 import ae.cyberspeed.game.data.config.WinCombinations;
 import ae.cyberspeed.game.data.config.WinItem;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class WinningCombinationService {
 
-    public static boolean checkSameSymbolRightToLeftDiagonal(String[][] matrix) {
-        if (matrix.length == 0) {
-            return false; // Empty matrix
-        }
-        int rows = matrix.length;
-        int cols = matrix[0].length;
+    public  boolean checkSameSymbolRightToLeftDiagonal(String[][] matrix) {
+        // Method to check right-to-left diagonal for the same symbol
+            int rows = matrix.length;
+            int cols = matrix[0].length;
 
-        // Iterate over all possible anti-diagonal sums (k = row + col)
-        for (int k = 0; k <= rows + cols - 2; k++) {
-            int iStart = Math.max(0, k - (cols - 1)); // Starting row for current diagonal
-            int iEnd = Math.min(rows - 1, k);         // Ending row for current diagonal
-            int elementCount = iEnd - iStart + 1;
-
-            // Skip diagonals with fewer than 2 elements
-            if (elementCount < 2) {
-                continue;
+            // Check if the matrix is square (required for diagonal check)
+            if (rows != cols) {
+                System.out.println("Matrix is not square. Cannot check diagonal.");
+                return false;
             }
 
-            // Check if all elements in the diagonal are the same
-            String firstSymbol = matrix[iStart][k - iStart];
-            boolean allSame = true;
-            for (int i = iStart; i <= iEnd; i++) {
-                int j = k - i;
-                if (j < 0 || j >= cols || !matrix[i][j].equals(firstSymbol)) {
-                    allSame = false;
-                    break;
+            // Take the first symbol in the right-to-left diagonal as the reference
+            String symbol = matrix[0][cols - 1];
+
+
+            // Check the right-to-left diagonal
+            for (int i = 1; i < rows; i++) {
+                if (matrix[i][cols - 1 - i] != symbol) {
+                    return false;
                 }
             }
-            if (allSame) {
-                return true;
-            }
-        }
-        return false;
+            return true;
     }
 
     public Map<WinItem, String> applyWinningCombinations(String[][] matrix, GameConfig config) {
@@ -189,41 +181,23 @@ public class WinningCombinationService {
     }
 
     public boolean checkSameSymbolLeftToRightDiagonal(String[][] matrix) {
-        if (matrix == null || matrix.length == 0) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        // Check if the matrix is square (required for diagonal check)
+        if (rows != cols) {
+            System.out.println("Matrix is not square. Cannot check diagonal.");
             return false;
         }
-        Map<Integer, List<String>> diagonals = new HashMap<>();
-
-        // Group elements by their diagonal (row - column)
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                int key = i - j;
-                diagonals.putIfAbsent(key, new ArrayList<>());
-                diagonals.get(key).add(matrix[i][j]);
+        // Take the first symbol as the reference
+        String symbol = matrix[0][0];
+        // Check the diagonal
+        for (int i = 1; i < rows; i++) {
+            if (matrix[i][i] != symbol) {
+                return false;
             }
         }
-
-        // Check each diagonal for all same elements
-        for (List<String> diagonal : diagonals.values()) {
-            if (diagonal.isEmpty()) {
-                continue;
-            }
-            String first = diagonal.get(0);
-            boolean allSame = true;
-            for (String c : diagonal) {
-                if (!c.equals(first)) {
-                    allSame = false;
-                    break;
-                }
-            }
-            if (allSame) {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
-
 
 }
 

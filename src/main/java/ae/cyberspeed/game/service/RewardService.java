@@ -13,12 +13,8 @@ public class RewardService {
                                   String bonusSymbol, GameConfig gameConfig) {
 
         for (Map.Entry<WinItem, String> entry : winItemMap.entrySet()) {
-
-
             WinItem k = entry.getKey();
             String symbol = entry.getValue();
-
-
             if (k instanceof SameSymbol3Times) {
                 SameSymbol3Times s3 = (SameSymbol3Times) k;
                 betAmount *= s3.getReward_multiplier();
@@ -65,8 +61,13 @@ public class RewardService {
                 betAmount *= sv.getReward_multiplier();
             }
             betAmount += (betAmount * getRewardMultiplier(symbol, gameConfig));
+
+            betAmount += getBonus(bonusSymbol, betAmount, gameConfig);
         }
-        betAmount += getBonus(bonusSymbol, betAmount, gameConfig);
+        if(winItemMap.isEmpty()){
+            //Its a loss
+            betAmount=0.0;
+        }
         return betAmount;
     }
 

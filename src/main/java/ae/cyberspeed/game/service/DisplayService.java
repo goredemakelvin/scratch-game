@@ -14,31 +14,24 @@ public class DisplayService {
 
     public String[][] generateStandardSymbol(double[][][] probabilities, int rows, int columns) {
         String[][] symbols = new String[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                double[] probabiltyArray = new double[6];
-                for (int k = 0; k < 6; k++) {
-                    probabiltyArray[k] = probabilities[i][j][k];
-                    if (k == 5) {
-                        int maxIndex = findMaxIndex(probabiltyArray);
-                        symbols[i][j] = String.valueOf((char) ('A' + maxIndex));
-                        break;
-                    }
-                }
+        for (int i = 0; i < probabilities.length; i++) {
+            for (int j = 0; j < probabilities[i].length; j++) {
+                int maxIndex = findMaxIndex(probabilities[i][j]);
+                symbols[i][j] = String.valueOf((char) ('A' + maxIndex));
             }
         }
         return symbols;
-
     }
 
     private int findMaxIndex(double[] array) {
-        double max = array[0];
-        int index = 0;
-        for (int i = 1; i < array.length; i++)
-            if (array[i] > max) {
-                index = i;
+        int maxIndex = 0;  // Assume first element is the largest
+        // Loop through the array to find the max index
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > array[maxIndex]) {
+                maxIndex = i;
             }
-        return index;
+        }
+        return maxIndex;
     }
 
 }

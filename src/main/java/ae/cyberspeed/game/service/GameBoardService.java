@@ -3,9 +3,12 @@ package ae.cyberspeed.game.service;
 import ae.cyberspeed.game.data.config.GameConfig;
 import ae.cyberspeed.game.data.config.Probabilities;
 import ae.cyberspeed.game.data.config.StandardSymbol;
+import ae.cyberspeed.game.data.config.Symbols;
 import ae.cyberspeed.game.exception.GameBoardException;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @NoArgsConstructor
@@ -27,56 +30,36 @@ public class GameBoardService {
 
     public double[][][] getStandardSymbolsProbabilityMatrix(GameConfig gameConfig) {
         Probabilities probabilities = gameConfig.getProbabilities();
-        double[][][] matrices = new double[gameConfig.getRows()][gameConfig.getColumns()][6];
-        for (int i = 0; i < gameConfig.getRows(); i++) {
-            for (int j = 0; j < gameConfig.getColumns(); j++) {
-                for (int k = 0; k < 6; k++) {
-                    StandardSymbol standardSymbol = probabilities.getStandard_symbols().get(k);
-                    double totalProbability = standardSymbol.getSymbolTotalProbability();
-                    switch (k) {
-
-                        case 0: {
-                            double probability = standardSymbol.getSymbols().getA().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                        case 1: {
-                            int probability = standardSymbol.getSymbols().getB().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                        case 2: {
-                            int probability = standardSymbol.getSymbols().getC().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                        case 3: {
-                            int probability = standardSymbol.getSymbols().getD().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                        case 4: {
-                            int probability = standardSymbol.getSymbols().getE().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                        case 5: {
-                            int probability = standardSymbol.getSymbols().getF().getProbability();
-                            double result = probability / totalProbability;
-                            matrices[i][j][k] = result;
-                        }
-                        break;
-                    }
-
-                }
+        StandardSymbol[] arr = new StandardSymbol[probabilities.getStandard_symbols().size()];
+        arr = probabilities.getStandard_symbols().toArray(arr);
+        double[][][] matrice = new double[gameConfig.getRows()][gameConfig.getColumns()][6];
+                Map<Integer,double[]> items = new HashMap<>();
+                for (int k = 0; k < arr.length; k++) {
+                    double[] m = new double[6];
+                    double symbolTotalProbability = arr[k].getSymbolTotalProbability();
+                    Symbols symbols = arr[k].getSymbols();
+                    double a = symbols.getA().getProbability();
+                    double b = symbols.getB().getProbability();
+                    double c = symbols.getC().getProbability();
+                    double d = symbols.getD().getProbability();
+                    double e = symbols.getE().getProbability();
+                    double f = symbols.getF().getProbability();
+                    m[0] = (a / symbolTotalProbability);
+                    m[1] = (b / symbolTotalProbability);
+                    m[2] = (c / symbolTotalProbability);
+                    m[3] = (d / symbolTotalProbability);
+                    m[4] = (e / symbolTotalProbability);
+                    m[5] = (f / symbolTotalProbability);
+                    items.put(k,m);
             }
-        }
-        return matrices;
+          for(int i=0;i<gameConfig.getRows();i++){
+              for(int j=0;j<gameConfig.getColumns();j++){
+                Random rand = new Random();
+                  int p = rand.nextInt(8);
+                  matrice[i][j] = items.get(p);
+              }
+          }
+        return matrice;
     }
 
     public String[][][] getBonusSymbolProbabilityMatrix(GameConfig gameConfig) {
@@ -90,7 +73,7 @@ public class GameBoardService {
         arrayBonusProbability[2] = _500x;
         String _1000x = probabilities.getBonus_symbols().getSymbols().get_1000().getName();
         arrayBonusProbability[3] = _1000x;
-        String _MISS = probabilities.getBonus_symbols().getSymbols().getMISS().getName();
+
 
         String[][][] matrices = new String[gameConfig.getRows()][gameConfig.getColumns()][4];
         for (int i = 0; i < gameConfig.getRows(); i++) {
@@ -103,5 +86,8 @@ public class GameBoardService {
             }
         }
         return matrices;
+    }
+    public String getLossSymbol(GameConfig gameConfig){
+        return  gameConfig.getProbabilities().getBonus_symbols().getSymbols().getMISS().getName();
     }
 }

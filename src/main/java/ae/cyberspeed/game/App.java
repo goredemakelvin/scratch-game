@@ -46,7 +46,7 @@ public class App {
         result.setMatrix(generatedSymbols);
         result.setAppliedWinningCombinations(winItems);
         result.setReward(reward);
-        result.setAppliedBonusSymbol(randomItem);
+        result.setAppliedBonusSymbol(reward>0?randomItem:gameBoardService.getLossSymbol(gameConfig));
         mapper.writeValue(System.out, result);
 
 
