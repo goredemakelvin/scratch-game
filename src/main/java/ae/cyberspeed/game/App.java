@@ -35,13 +35,13 @@ public class App {
         Map<WinItem, String> winItems = winningCombinationService.applyWinningCombinations(generatedSymbols, gameConfig);
         String[][][] bonusSymbolProbabilityMatrix = gameBoardService.getBonusSymbolProbabilityMatrix(gameConfig);
         Random random = new Random();
-        int randomRow = random.nextInt(gameConfig.getRows());  // 0 to 2
-        int randomCol = random.nextInt(gameConfig.getColumns());  // 0 to 2
+        int randomRow = random.nextInt(gameConfig.getRows());
+        int randomCol = random.nextInt(gameConfig.getColumns());
         int randomBonusSymbol = random.nextInt(4);
         // Get the random item
         String randomItem = bonusSymbolProbabilityMatrix[randomRow][randomCol][randomBonusSymbol];
         RewardService rewardService = new RewardService();
-        double reward = rewardService.calculateReward(winItems, 25, randomItem, gameConfig);
+        double reward = rewardService.calculateReward(winItems, init.getBettingAmount(), randomItem, gameConfig);
         Result result = new Result();
         result.setMatrix(generatedSymbols);
         result.setAppliedWinningCombinations(winItems);
@@ -90,8 +90,6 @@ public class App {
         }
 
         // Show processed values
-        System.out.println("Config Path: " + configPath);
-        System.out.println("Betting Amount: " + bettingAmount);
 
         Params params = new Params();
         params.setConfigPath(configPath);
